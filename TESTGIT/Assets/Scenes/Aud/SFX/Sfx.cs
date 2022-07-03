@@ -12,21 +12,31 @@ namespace Aud.SFX
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 soundFX[0].Play();
             }
 
-            else if(Input.GetKeyDown(KeyCode.A))
+            else if (Input.GetKeyDown(KeyCode.A))
             {
                 soundFX[1].Play();
             }
-            else if (Input.GetKeyDown(KeyCode.Space)) {
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
                 soundFX[2].Play();
             }
-            else {
-                Debug.LogWarning("Error, sound files not found!");
-                Thread.Sleep(5000);
+        }
+
+        void OnCollisionEnter2D(Collision2D groundCollision)
+        {
+            if (groundCollision.relativeVelocity.magnitude > 1)
+            {
+                if (!soundFX[4].isPlaying)
+                    soundFX[4].Play();
+            }
+            else
+            {
+                Debug.Log("OnCollisionEnter");
             }
         }
     }
